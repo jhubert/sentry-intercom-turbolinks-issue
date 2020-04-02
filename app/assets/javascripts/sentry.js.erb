@@ -1,0 +1,6 @@
+var config = {
+  dsn: '<%= ENV["SENTRY_DSN"] %>'
+};
+
+console.log(config);
+Sentry.init(config);
