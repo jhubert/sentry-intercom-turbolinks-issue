@@ -1,24 +1,26 @@
-# README
+# Sentry, Turbolinks, and Intercom Issue
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Using these 3 libraries together causes major issues in Internet Explorer.
 
-Things you may want to cover:
+I haven't figured out exactly why. It seems to be something with the way that Sentry wraps Intercom's mousemove listener, and the way that turbolinks unloads and reloads the page.
 
-* Ruby version
+To test this, you'll need an intercom app id and a Sentry DSN.
 
-* System dependencies
+Run the server like so:
 
-* Configuration
+```bash
+export SENTRY_DSN=<DSN>
+export INTERCOM_APP_ID=<APP_ID>
+rails s
+```
 
-* Database creation
+And then, in IE 11 or Edge:
 
-* Database initialization
+1. https://localhost:3000
+2. Open the JS Debugger
+3. Wait for Intercom to load
+4. Click on "Go to Show"
+5. Wait for Intercom to load.
+6. Move your mouse.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+You should see the errors in the console.
